@@ -1,0 +1,44 @@
+version: '{build}'
+branches:
+  only:
+    - master
+
+clone_folder: c:\projects\newton
+
+image:
+  - Visual Studio 2017
+
+configuration:
+  - Release
+  - Debug
+
+platform:
+  - x64
+
+environment:
+  matrix:
+    - arch: Win64
+
+matrix:
+  fast_finish: true
+
+init:
+  - set arch=
+  - if "%arch%"=="Win64" (set arch= Win64)
+  - echo %arch%
+  - echo %APPVEYOR_BUILD_WORKER_IMAGE%
+  - set generator="Visual Studio 15 2017%arch%"
+  - echo %generator%
+
+before_build:
+  - cmd: |-
+    git submodule update --init --recursive
+    mkdir -p build
+    cd build
+    cmake --version
+    cmake .. -G %generator%
+
+build:
+  project: c:\projects\newton\build\newton.sln
+  verbosity: minimal
+  parallel: true

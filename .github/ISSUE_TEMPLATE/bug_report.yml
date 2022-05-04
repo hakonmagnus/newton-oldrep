@@ -1,0 +1,42 @@
+name: Bug Report
+description: Report a bug encountered while operating Newton
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: |
+          Please provide as much info as possible. Not doing so may result in your bug not
+          being addressed in a timely manner.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What was the expected behavior?
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: How can we reproduce the bug?
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Anything else we should know?
+
+  - type: textarea
+    id: sysinfo
+    attributes:
+      label: System environment information
+      value: |
+        <details>
+          Newton version:
+          OS name and version:
+          Compiler name and version:
+        </details>

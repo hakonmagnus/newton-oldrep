@@ -1,0 +1,21 @@
+// Copyright (c) 2022 Hákon Hjaltalín.
+//
+// This project is licensed under the MIT license. Please see LICENSE
+// or go to https://opensource.org/licenses/MIT for more information.
+
+#pragma once
+
+/**
+ * \file config.h
+ * \brief Newton configuration
+ * \author Hákon Hjaltalín
+ *
+ * This file contains version definitions for Newton.
+ */
+
+#define NT_VERSION_MAJOR @CMAKE_PROJECT_VERSION_MAJOR@
+#define NT_VERSION_MINOR @CMAKE_PROJECT_VERSION_MINOR@
+#define NT_VERSION_PATCH @CMAKE_PROJECT_VERSION_PATCH@
+#define NT_VERSION "v@CMAKE_PROJECT_VERSION_MAJOR@.@CMAKE_PROJECT_VERSION_MINOR@.@CMAKE_PROJECT_VERSION_PATCH@"
+
+@NT_HEADER_SHARED_LIBS@

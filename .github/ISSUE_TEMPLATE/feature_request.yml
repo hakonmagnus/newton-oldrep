@@ -1,0 +1,22 @@
+name: Feature Request
+description: Request for a new feature to be added
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Can you describe the behavior of the new feature?
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: What is the motivation behind adding/changing this feature?
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: How do you propose we implement this feature?
+
+  - type: textarea
+    id: self
+    attributes:
+      label: Would you be willing to work on this feature yourself?
