@@ -32,11 +32,11 @@ init:
 
 before_build:
   - cmd: |-
-    git submodule update --init --recursive
-    mkdir -p build
-    cd build
-    cmake --version
-    cmake .. -G %generator%
+      git submodule update --init --recursive
+      mkdir -p build
+      cd build
+      cmake --version
+      cmake .. -G %generator%
 
 build:
   project: c:\projects\newton\build\newton.sln
