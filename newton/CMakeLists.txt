@@ -1,11 +1,11 @@
 set(NEWTON_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/base/NtObject.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core/NtApplication.cpp
 )
 
 set(NEWTON_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/newton.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/base/NtDefs.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/base/NtObject.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/core/NtApplication.h
 )
 
 if (BUILD_SHARED_LIBS)
@@ -29,3 +29,4 @@ set_target_properties(newton PROPERTIES FOLDER "")
 
 set(NT_SOURCE_FILES ${NT_SOURCE_FILES} ${NEWTON_SOURCES} PARENT_SCOPE)
 set(NT_INCLUDE_FILES ${NT_INCLUDE_FILES} ${NEWTON_INCLUDES} PARENT_SCOPE)
+
