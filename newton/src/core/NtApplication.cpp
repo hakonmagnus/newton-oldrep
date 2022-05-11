@@ -6,49 +6,49 @@
 #include "newton/newton.h"
 using namespace newton;
 
-NtApplication* NtApplication::ms_instance{ nullptr };
+NtApplication* NtApplication::ms_instance{nullptr};
 
-NtApplication::NtApplication() :
-    m_isRunning{ false }
+NtApplication::NtApplication() : m_isRunning{false}
 {
-    if (ms_instance) {
-        throw NtInitializeError("An application instance has already been created.");
-    }
+  if (ms_instance) {
+    throw NtInitializeError(
+      "An application instance has already been created.");
+  }
 
-    ms_instance = this;
+  ms_instance = this;
 }
 
 NtApplication::~NtApplication()
 {
-    m_isRunning = false;
-    ms_instance = nullptr;
+  m_isRunning = false;
+  ms_instance = nullptr;
 
 #ifdef NT_WINDOWS
-    WSACleanup();
+  WSACleanup();
 #endif
 }
 
-bool NtApplication::onInit(int& argc, char** argv) {
-    if (!ms_instance) {
-        throw NtNullException("Application instance is null.");
-    }
+bool NtApplication::onInit(int& argc, char** argv)
+{
+  if (!ms_instance) {
+    throw NtNullException("Application instance is null.");
+  }
 
 #ifdef NT_WINDOWS
-    WSADATA wsaData;
-    int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+  WSADATA wsaData;
+  int iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
 
-    if (iResult != 0) {
-        throw NtInitializeError("WSAStartup failed: " + iResult);
-    }
+  if (iResult != 0) {
+    throw NtInitializeError("WSAStartup failed: " + iResult);
+  }
 #endif
 
-    return true;
+  return true;
 }
 
-void NtApplication::onExit() {
-}
+void NtApplication::onExit() {}
 
-int NtApplication::run() {
-    return 0;
+int NtApplication::run()
+{
+  return 0;
 }
-

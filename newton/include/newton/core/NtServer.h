@@ -6,12 +6,16 @@
 #pragma once
 
 /**
- * \file newton.h
- * \brief Newton header
- * \author Hákon Hjaltalín
+ * \file NtServer.h
+ * \brief Server class file
  *
- * This is the main header for the Newton Framework.
+ * This file contains the class definition for a socket server.
  */
 
 #include "newton/base/NtException.h"
-#include "newton/core/NtApplication.h"
+
+namespace newton
+{
+
+}
+

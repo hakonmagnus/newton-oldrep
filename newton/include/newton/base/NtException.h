@@ -19,45 +19,38 @@
 
 namespace newton
 {
-
 /**
  * \class NtException
  * \brief Base exception class
  */
 class NT_EXPORT NtException : public std::exception
 {
-public:
-    /**
-     * \brief Constructor
-     *
-     * Default constructor with an error message.
-     *
-     * \param msg Error message
-     */
-    NtException(const std::string& msg) :
-        m_message{ msg }
-    {
-    }
+  public:
+  /**
+   * \brief Constructor
+   *
+   * Default constructor with an error message.
+   *
+   * \param msg Error message
+   */
+  NtException(const std::string& msg) : m_message{msg} {}
 
-    /**
-     * \brief Virtual destructor
-     */
-    virtual ~NtException() { }
+  /**
+   * \brief Virtual destructor
+   */
+  virtual ~NtException() {}
 
-    /**
-     * \brief Exception message
-     *
-     * Returns the stored error message.
-     *
-     * \return Error message
-     */
-    virtual const char* what() const throw()
-    {
-        return m_message.c_str();
-    }
+  /**
+   * \brief Exception message
+   *
+   * Returns the stored error message.
+   *
+   * \return Error message
+   */
+  virtual const char* what() const throw() { return m_message.c_str(); }
 
-protected:
-    std::string m_message;
+  protected:
+  std::string m_message;
 };
 
 /**
@@ -69,24 +62,23 @@ protected:
  */
 class NT_EXPORT NtInitializeError : public NtException
 {
-public:
-    /**
-     * \brief Default constructor
-     *
-     * Default constructor with error message.
-     *
-     * \param msg Error message
-     */
-    NtInitializeError(const std::string& msg) :
-        NtException{ msg }
-    {
-        m_message = "Initialization error: " + m_message;
-    }
+  public:
+  /**
+   * \brief Default constructor
+   *
+   * Default constructor with error message.
+   *
+   * \param msg Error message
+   */
+  NtInitializeError(const std::string& msg) : NtException{msg}
+  {
+    m_message = "Initialization error: " + m_message;
+  }
 
-    /**
-     * \brief Virtual destructor
-     */
-    virtual ~NtInitializeError() { }
+  /**
+   * \brief Virtual destructor
+   */
+  virtual ~NtInitializeError() {}
 };
 
 /**
@@ -98,25 +90,23 @@ public:
  */
 class NT_EXPORT NtNullException : public NtException
 {
-public:
-    /**
-     * \brief Default constructor
-     *
-     * Default constructor with error message.
-     *
-     * \param msg Error message
-     */
-    NtNullException(const std::string& msg) :
-        NtException{ msg }
-    {
-        m_message = "Null exception: " + m_message;
-    }
+  public:
+  /**
+   * \brief Default constructor
+   *
+   * Default constructor with error message.
+   *
+   * \param msg Error message
+   */
+  NtNullException(const std::string& msg) : NtException{msg}
+  {
+    m_message = "Null exception: " + m_message;
+  }
 
-    /**
-     * \brief Virtual destructor
-     */
-    virtual ~NtNullException() { }
+  /**
+   * \brief Virtual destructor
+   */
+  virtual ~NtNullException() {}
 };
 
-}
-
+}  // namespace newton

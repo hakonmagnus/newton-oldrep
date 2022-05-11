@@ -16,7 +16,8 @@
 #ifndef __cplusplus
 #  error A C++ compiler must be used to build Newton.
 #else
-#  if ((defined(_MSVC_LANG) && _MSVC_LANG < 201402L) || (!defined(_MSVC_LANG) && __cplusplus < 201402L))
+#  if ((defined(_MSVC_LANG) && _MSVC_LANG < 201402L) ||                        \
+       (!defined(_MSVC_LANG) && __cplusplus < 201402L))
 #    error Your compiler must support C++14 or higher.
 #  endif
 #endif
@@ -101,7 +102,8 @@
 #endif
 
 #ifndef NT_EXPORT
-#  if defined(NT_WINDOWS) && defined(NT_COMPILER_MSVC) && defined(NT_SHARED_LIBS)
+#  if defined(NT_WINDOWS) && defined(NT_COMPILER_MSVC) &&                      \
+    defined(NT_SHARED_LIBS)
 #    define NT_EXPORT __declspec(dllexport)
 #  else
 #    define NT_EXPORT
@@ -109,7 +111,8 @@
 #endif
 
 #ifndef NT_IMPORT
-#  if defined(NT_WINDOWS) && defined(NT_COMPILER_MSVC) && defined(NT_SHARED_LIBS)
+#  if defined(NT_WINDOWS) && defined(NT_COMPILER_MSVC) &&                      \
+    defined(NT_SHARED_LIBS)
 #    define NT_IMPORT extern __declspec(dllimport)
 #  else
 #    define NT_IMPORT extern
@@ -214,7 +217,7 @@ using std::uintptr_t;
 #if defined(NT_WINDOWS)
 #  include <winsock2.h>
 #  include <ws2tcpip.h>
-#  if NT_COMPILER_MSVC
+#  if defined(NT_COMPILER_MSVC)
 #    pragma comment(lib, "Ws2_32.lib")
 #  endif
 #else
