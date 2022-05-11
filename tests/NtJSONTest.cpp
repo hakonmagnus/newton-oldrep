@@ -36,3 +36,17 @@ TEST(NtJSONTest, Number)
     NtJSONNumber num2(5.0);
     EXPECT_EQ(true, num == num2);
 }
+
+TEST(NtJSONTest, Boolean)
+{
+    NtJSONBoolean b(false);
+    EXPECT_EQ(false, b.value());
+    b.setValue(true);
+    EXPECT_EQ(true, b.value());
+    b = "false";
+    EXPECT_EQ(false, b.value());
+    b = 5;
+    EXPECT_EQ(true, b.value());
+    b = 0;
+    EXPECT_EQ(true, b == 0);
+}

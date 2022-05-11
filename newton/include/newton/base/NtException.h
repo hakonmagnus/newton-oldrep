@@ -109,4 +109,31 @@ class NT_EXPORT NtNullException : public NtException
   virtual ~NtNullException() {}
 };
 
+/**
+ * \class NtInvalidArgument
+ * \brief Invalid argument
+ *
+ * Exception thrown when an argument is invalid
+ *
+ */
+class NT_EXPORT NtInvalidArgument : public NtException
+{
+  public:
+  /**
+   * \brief Default constructor
+   *
+   * Default constructor with error message.
+   *
+   * \param msg Error message
+   */
+  NtInvalidArgument(const std::string& msg) : NtException{msg}
+  {
+    m_message = "Invalid argument exception: " + m_message;
+  }
+
+  /**
+   * \brief Virtual destructor
+   */
+  virtual ~NtInvalidArgument() {}
+};
 }  // namespace newton
