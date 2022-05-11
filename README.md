@@ -34,7 +34,7 @@ server rather than use an interpreter.
 
 <h2 align="center">Install</h2>
 
-To build and install Newton, you will need CMake and a C++17-capable compiler. CLone the repository
+To build and install Newton, you will need CMake and a C++17-capable compiler. Clone the repository
 and create your build directory:
 
 ```sh

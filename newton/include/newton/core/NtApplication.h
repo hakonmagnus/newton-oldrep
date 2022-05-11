@@ -80,6 +80,11 @@ protected:
      * True if app is running
      */
     bool m_isRunning;
+    
+    /**
+     * Application instance
+     */
+    static NtApplication* ms_instance;
 };
 
 }

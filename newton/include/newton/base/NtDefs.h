@@ -16,8 +16,8 @@
 #ifndef __cplusplus
 #  error A C++ compielr must be used to build Newton.
 #else
-#  if ((defined(_MSVC_LANG) && _MSVC_LANG < 201703L) || __cplusplus < 201703L)
-#    error Your compiler must support C++17 or higher.
+#  if ((defined(_MSVC_LANG) && _MSVC_LANG < 201402L) || __cplusplus < 201402L)
+#    error Your compiler must support C++14 or higher.
 #  endif
 #endif
 
@@ -57,7 +57,7 @@
 #endif
 
 #if defined(NT_APPLE_CLANG)
-#  if !(((__clang_major__ * 100) + __clang_minor__) >= 1000)
+#  if !(((__clang_major__ * 100) + __clang_minor__) >= 510)
 #    error Unsupported compiler.
 #  endif
 #  define NT_COMPILER_VERSION_MAJOR (__clang_major__)
@@ -68,7 +68,7 @@
 #    define NT_SIMULATE_VERSION_MINOR (_MSC_VER % 100)
 #  endif
 #elif defined(NT_COMPILER_CLANG)
-#  if !(((__clang_major__ * 100) + __clang_minor__) > 500)
+#  if !(((__clang_major__ * 100) + __clang_minor__) > 340)
 #    error Unsupported compiler.
 #  endif
 #  define NT_COMPILER_VERSION_MAJOR (__clang_major__)
@@ -79,7 +79,7 @@
 #    define NT_SIMULATE_VERSION_MINOR (_MSC_VER % 100)
 #  endif
 #elif defined(NT_COMPILER_GCC)
-#  if !((__GNUC__ * 100 + __GNUC_MINOR__) >= 800)
+#  if !((__GNUC__ * 100 + __GNUC_MINOR__) >= 500)
 #    error Unsupported compiler.
 #  endif
 #  define NT_COMPILER_VERSION_MAJOR (__GNUC__)

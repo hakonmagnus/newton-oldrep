@@ -13,5 +13,6 @@
  * This is the main header for the Newton Framework.
  */
 
+#include "newton/base/NtException.h"
 #include "newton/core/NtApplication.h"
 

@@ -5,6 +5,7 @@ set(NEWTON_SOURCES
 set(NEWTON_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/newton.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/base/NtDefs.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/base/NtException.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/core/NtApplication.h
 )
 
