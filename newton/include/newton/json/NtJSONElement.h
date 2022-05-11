@@ -16,7 +16,6 @@
 
 namespace newton
 {
-
 /**
  * \class NtJSONElement
  * \brief JSON element
@@ -25,55 +24,43 @@ namespace newton
  */
 class NT_EXPORT NtJSONElement
 {
-public:
-    /**
-     * \enum Type
-     * \brief Type of element
-     *
-     * This enum class defines the element type.
-     */
-    enum class Type
-    {
-        OBJECT,
-        ARRAY,
-        STRING,
-        NUMBER,
-        BOOLEAN,
-        NUL
-    };
+  public:
+  /**
+   * \enum Type
+   * \brief Type of element
+   *
+   * This enum class defines the element type.
+   */
+  enum class Type { OBJECT, ARRAY, STRING, NUMBER, BOOLEAN, NUL };
 
-    /**
-     * \brief Default constructor
-     *
-     * Default constructor taking a type of element.
-     *
-     * \param type Element type
-     */
-    explicit NtJSONElement(const Type type) :
-        m_type{ type }
-    {
-    }
+  /**
+   * \brief Default constructor
+   *
+   * Default constructor taking a type of element.
+   *
+   * \param type Element type
+   */
+  explicit NtJSONElement(const Type type) : m_type{type} {}
 
-    /**
-     * \brief Virtual destructor
-     */
-    virtual ~NtJSONElement() { }
+  /**
+   * \brief Virtual destructor
+   */
+  virtual ~NtJSONElement() {}
 
-    /**
-     * \brief Get the type of element
-     *
-     * Get the JSON element type.
-     *
-     * \return Element type
-     */
-    Type type() const { return m_type; }
+  /**
+   * \brief Get the type of element
+   *
+   * Get the JSON element type.
+   *
+   * \return Element type
+   */
+  Type type() const { return m_type; }
 
-protected:
-    /**
-     * Element type
-     */
-    Type m_type;
+  protected:
+  /**
+   * Element type
+   */
+  Type m_type;
 };
 
-}
-
+}  // namespace newton
