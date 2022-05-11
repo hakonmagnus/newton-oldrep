@@ -14,9 +14,9 @@
  */
 
 #ifndef __cplusplus
-#  error A C++ compielr must be used to build Newton.
+#  error A C++ compiler must be used to build Newton.
 #else
-#  if ((defined(_MSVC_LANG) && _MSVC_LANG < 201402L) || __cplusplus < 201402L)
+#  if ((defined(_MSVC_LANG) && _MSVC_LANG < 201402L) || (!defined(_MSVC_LANG) && __cplusplus < 201402L))
 #    error Your compiler must support C++14 or higher.
 #  endif
 #endif
@@ -88,7 +88,7 @@
 #    define NT_COMPILER_VERSION_PATCH (__GNUC_PATCHLEVEL__)
 #  endif
 #elif defined(NT_COMPILER_MSVC)
-#  if !(_MSC_VER >= 1900)
+#  if (_MSC_VER < 1900)
 #    error Unsupported compiler.
 #  endif
 #  define NT_COMPILER_VERSION_MAJOR (_MSC_VER / 100)
@@ -97,7 +97,7 @@
 #    define NT_COMPILER_VERSION_PATCH (_MSC_FULL_VER % 100000)
 #  endif
 #else
-#  error Unsupported compiler·
+#  error Unsupported compiler.
 #endif
 
 #ifndef NT_EXPORT

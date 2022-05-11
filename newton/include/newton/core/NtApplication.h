@@ -75,6 +75,15 @@ public:
      */
     int run();
 
+    /**
+     * \brief Get app instance
+     *
+     * Get the application instance.
+     *
+     * \return Application instance
+     */
+    static NtApplication* instance() { return ms_instance; }
+
 protected:
     /**
      * True if app is running
