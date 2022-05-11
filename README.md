@@ -6,7 +6,7 @@
   <br>
 
 ![GitHub](https://img.shields.io/github/license/hakonmagnus/newton)
-![Lines of code](https://img.shields.io/tokei/lines/github/hakonmagnus/gravity)
+![Lines of code](https://img.shields.io/tokei/lines/github/hakonmagnus/newton.git)
 [![Build Status](https://app.travis-ci.com/hakonmagnus/newton.svg?branch=master)](https://app.travis-ci.com/hakonmagnus/newton)
 [![codecov](https://codecov.io/gh/hakonmagnus/newton/branch/main/graph/badge.svg?token=Q4D0VVZO10)](https://codecov.io/gh/hakonmagnus/newton)
 [![Build status](https://ci.appveyor.com/api/projects/status/tmmgc9107v4xagat/branch/master?svg=true)](https://ci.appveyor.com/project/hakonmagnus/newton/branch/master)

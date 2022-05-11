@@ -157,46 +157,66 @@ class NT_EXPORT NtJSONString : public NtJSONElement
    *
    * Compare if this class is equal to another
    *
+   * \param str This object
    * \param other Other NtJSONString
    * \return True if equal
    */
-  bool operator==(const NtJSONString& other) const
-  {
-    return m_value == other.m_value;
-  }
+  friend bool operator==(const NtJSONString& str, const NtJSONString& other);
 
   /**
    * \brief Comparison operator
    *
    * Compare if this class is not equal to another
    *
+   * \param str This object
    * \param other Other NtJSONString
    * \return False if equal
    */
-  bool operator!=(const NtJSONString& other) const
-  {
-    return m_value != other.m_value;
-  }
+  friend bool operator!=(const NtJSONString& str, const NtJSONString& other);
 
   /**
    * \brief Comparison operator
    *
    * Compare if this class is equal to an std::string
    *
-   * \param str String to compare
+   * \param str This object
+   * \param sstr String to compare
    * \return True if equal
    */
-  bool operator==(const std::string& str) const { return m_value == str; }
+  friend bool operator==(const NtJSONString& str, const std::string& sstr);
 
   /**
    * \brief Comparison operator
    *
    * Compare if this class is not equal to an std::string
    *
-   * \param str String to compare
+   * \param str This object
+   * \param sstr String to compare
    * \return False if equal
    */
-  bool operator!=(const std::string& str) const { return m_value != str; }
+  friend bool operator!=(const NtJSONString& str, const std::string& sstr);
+
+  /**
+   * \brief Comparison operator
+   *
+   * Compare if this class is equal to a C-style string
+   *
+   * \param str This object
+   * \param cstr String to compare
+   * \return True if equal
+   */
+  friend bool operator==(const NtJSONString& str, const char* cstr);
+
+  /**
+   * \brief Comparison operator
+   *
+   * Compare if this class is not equal to a C-style string
+   *
+   * \param str This object
+   * \param cstr String to compare
+   * \return False if equal
+   */
+  friend bool operator!=(const NtJSONString& str, const char* cstr);
 
   private:
   /**
@@ -204,5 +224,23 @@ class NT_EXPORT NtJSONString : public NtJSONElement
    */
   std::string m_value;
 };
+
+inline bool operator==(const NtJSONString& str, const NtJSONString& other)
+{
+  return str.m_value == other.m_value;
+}
+
+inline bool operator!=(const NtJSONString& str, const NtJSONString& other)
+{
+return str.m_value != other.m_value;
+}
+
+inline bool operator==(const NtJSONString& str, const std::string& sstr) { return str.m_value == sstr; }
+
+inline bool operator!=(const NtJSONString& str, const std::string& sstr) { return str.m_value != sstr; }
+
+inline bool operator==(const NtJSONString& str, const char* cstr) { return str.m_value == cstr; }
+
+inline bool operator!=(const NtJSONString& str, const char* cstr) { return str.m_value != cstr; }
 
 }  // namespace newton

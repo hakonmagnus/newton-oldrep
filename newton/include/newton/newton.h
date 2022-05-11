@@ -18,3 +18,5 @@
 #include "newton/json/NtJSONString.h"
 #include "newton/json/NtJSONNumber.h"
 #include "newton/json/NtJSONBoolean.h"
+#include "newton/json/NtJSONNul.h"
+#include "newton/json/NtJSONArray.h"

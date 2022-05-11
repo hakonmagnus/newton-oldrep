@@ -136,4 +136,32 @@ class NT_EXPORT NtInvalidArgument : public NtException
    */
   virtual ~NtInvalidArgument() {}
 };
+
+/**
+ * \class NtOutOfRange
+ * \brief Index out of range
+ *
+ * Exception thrown when a container index is out of range.
+ *
+ */
+class NT_EXPORT NtOutOfRange : public NtException
+{
+  public:
+  /**
+   * \brief Default constructor
+   *
+   * Default constructor with error message.
+   *
+   * \param msg Error message
+   */
+  NtOutOfRange(const std::string& msg) : NtException{msg}
+  {
+    m_message = "Out of range exception: " + m_message;
+  }
+
+  /**
+   * \brief Virtual destructor
+   */
+  virtual ~NtOutOfRange() {}
+};
 }  // namespace newton

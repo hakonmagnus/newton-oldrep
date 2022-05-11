@@ -50,3 +50,14 @@ TEST(NtJSONTest, Boolean)
     b = 0;
     EXPECT_EQ(true, b == 0);
 }
+
+TEST(NtJSONTest, Array)
+{
+    NtJSONArray arr = { new NtJSONString("one"), new NtJSONString("two"), new NtJSONString("three") };
+    NtJSONString* str1 = static_cast<NtJSONString*>(arr[0]);
+    NtJSONString* str2 = static_cast<NtJSONString*>(arr[1]);
+    NtJSONString* str3 = static_cast<NtJSONString*>(arr[2]);
+    EXPECT_EQ(true, *str1 == "one");
+    EXPECT_EQ(true, *str2 == "two");
+    EXPECT_EQ(true, *str3 == "three");
+}

@@ -148,46 +148,44 @@ class NT_EXPORT NtJSONNumber : public NtJSONElement
    *
    * Compare if this class is equal to another
    *
+   * \param num This object
    * \param other Other NtJSONNumber
    * \return True if equal
    */
-  bool operator==(const NtJSONNumber& other) const
-  {
-    return m_value == other.m_value;
-  }
+  friend bool operator==(const NtJSONNumber& num, const NtJSONNumber& other);
 
   /**
    * \brief Comparison operator
    *
    * Compare if this class is not equal to another
    *
+   * \param num This object
    * \param other Other NtJSONNumber
    * \return False if equal
    */
-  bool operator!=(const NtJSONNumber& other) const
-  {
-    return m_value != other.m_value;
-  }
+  friend bool operator!=(const NtJSONNumber& num, const NtJSONNumber& other);
 
   /**
    * \brief Comparison operator
    *
    * Compare if this class is equal to a double
    *
-   * \param num Number to compare
+   * \param num This object
+   * \param d Double to compare
    * \return True if equal
    */
-  bool operator==(const double num) const { return m_value == num; }
+  friend bool operator==(const NtJSONNumber& num, const double d);
 
   /**
    * \brief Comparison operator
    *
    * Compare if this class is not equal to a double
    *
-   * \param num Number to compare
+   * \param num This object
+   * \param d Double to compare
    * \return False if equal
    */
-  bool operator!=(const double num) const { return m_value != num; }
+  friend bool operator!=(const NtJSONNumber& num, const double d);
 
   private:
   /**
@@ -195,5 +193,25 @@ class NT_EXPORT NtJSONNumber : public NtJSONElement
    */
   double m_value;
 };
+
+inline bool operator==(const NtJSONNumber& num, const NtJSONNumber& other)
+{
+    return num.m_value == other.m_value;
+}
+
+inline bool operator!=(const NtJSONNumber& num, const NtJSONNumber& other)
+{
+    return num.m_value != other.m_value;
+}
+
+inline bool operator==(const NtJSONNumber& num, const double d)
+{
+    return num.m_value == d;
+}
+
+inline bool operator!=(const NtJSONNumber& num, const double d)
+{
+    return num.m_value != d;
+}
 
 }  // namespace newton
