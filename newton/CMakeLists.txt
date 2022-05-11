@@ -10,6 +10,7 @@ set(NEWTON_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/core/NtServer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONValue.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONString.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONNumber.h
 )
 
 if (BUILD_SHARED_LIBS)
