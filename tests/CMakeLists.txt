@@ -14,6 +14,7 @@ set_target_properties(gmock_main PROPERTIES FOLDER extern)
 set(TESTS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/NtApplicationTest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/NtJSONTest.cpp
 )
 
 add_executable(tests ${TESTS_SOURCES})
