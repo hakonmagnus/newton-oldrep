@@ -7,161 +7,63 @@
 
 /**
  * \file NtException.h
- * \brief Newton exception definitions
+ * \brief Exception classes
  * \author Hákon Hjaltalín
  *
- * This file contains various exceptions for the Newton Framework.
+ * This file contains definitions for exceptions and errors.
  */
 
 #include "newton/base/NtDefs.h"
-#include <exception>
 #include <string>
+#include <exception>
 
 namespace newton
 {
-/**
- * \class NtException
- * \brief Base exception class
- */
+
 class NT_EXPORT NtException : public std::exception
 {
-  public:
-  /**
-   * \brief Constructor
-   *
-   * Default constructor with an error message.
-   *
-   * \param msg Error message
-   */
-  NtException(const std::string& msg) : m_message{msg} {}
-
-  /**
-   * \brief Virtual destructor
-   */
-  virtual ~NtException() {}
-
-  /**
-   * \brief Exception message
-   *
-   * Returns the stored error message.
-   *
-   * \return Error message
-   */
-  virtual const char* what() const throw() { return m_message.c_str(); }
-
-  protected:
-  std::string m_message;
+public:
+    virtual std::string message()
+    {
+        return "Newton Exception.";
+    }
 };
 
-/**
- * \class NtInitializeError
- * \brief Initialization exception
- *
- * Exception thrown when initialization fails for some reason
- *
- */
-class NT_EXPORT NtInitializeError : public NtException
+class NT_EXPORT NtSyntaxError : public NtException
 {
-  public:
-  /**
-   * \brief Default constructor
-   *
-   * Default constructor with error message.
-   *
-   * \param msg Error message
-   */
-  NtInitializeError(const std::string& msg) : NtException{msg}
-  {
-    m_message = "Initialization error: " + m_message;
-  }
+public:
+    /**
+     * \brief Constructor
+     *
+     * Default constructor with message.
+     *
+     * \param msg Message string
+     */
+    NtSyntaxError(const std::string& msg)
+        : m_msg{ msg }
+    {
+    }
 
-  /**
-   * \brief Virtual destructor
-   */
-  virtual ~NtInitializeError() {}
+    /**
+     * \brief Get exception message
+     *
+     * Get the exception message.
+     *
+     * \return Exception message
+     */
+    virtual std::string message() override
+    {
+        std::string str = "Newton Syntax Error: ";
+        str += m_msg;
+        return str;
+    }
+
+protected:
+    /**
+     * Message string
+     */
+    std::string m_msg;
 };
 
-/**
- * \class NtNullException
- * \brief Null exception
- *
- * Exception thrown when an argument or other variable is null
- *
- */
-class NT_EXPORT NtNullException : public NtException
-{
-  public:
-  /**
-   * \brief Default constructor
-   *
-   * Default constructor with error message.
-   *
-   * \param msg Error message
-   */
-  NtNullException(const std::string& msg) : NtException{msg}
-  {
-    m_message = "Null exception: " + m_message;
-  }
+}
 
-  /**
-   * \brief Virtual destructor
-   */
-  virtual ~NtNullException() {}
-};
-
-/**
- * \class NtInvalidArgument
- * \brief Invalid argument
- *
- * Exception thrown when an argument is invalid
- *
- */
-class NT_EXPORT NtInvalidArgument : public NtException
-{
-  public:
-  /**
-   * \brief Default constructor
-   *
-   * Default constructor with error message.
-   *
-   * \param msg Error message
-   */
-  NtInvalidArgument(const std::string& msg) : NtException{msg}
-  {
-    m_message = "Invalid argument exception: " + m_message;
-  }
-
-  /**
-   * \brief Virtual destructor
-   */
-  virtual ~NtInvalidArgument() {}
-};
-
-/**
- * \class NtOutOfRange
- * \brief Index out of range
- *
- * Exception thrown when a container index is out of range.
- *
- */
-class NT_EXPORT NtOutOfRange : public NtException
-{
-  public:
-  /**
-   * \brief Default constructor
-   *
-   * Default constructor with error message.
-   *
-   * \param msg Error message
-   */
-  NtOutOfRange(const std::string& msg) : NtException{msg}
-  {
-    m_message = "Out of range exception: " + m_message;
-  }
-
-  /**
-   * \brief Virtual destructor
-   */
-  virtual ~NtOutOfRange() {}
-};
-}  // namespace newton

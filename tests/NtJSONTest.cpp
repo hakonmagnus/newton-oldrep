@@ -7,57 +7,127 @@
 #include "newton/newton.h"
 using namespace newton;
 
-TEST(NtJSONTest, String)
+#include <fstream>
+
+TEST(NtJSONTest, NtJSONObject)
 {
-    NtJSONString str("hello");
-    EXPECT_EQ("hello", str.value());
-    str.setValue("world");
-    EXPECT_EQ("world", str.value());
-    str.fromNumber(4.5);
-    EXPECT_EQ("4.5", str.value());
-    EXPECT_EQ(4.5, str.toNumber());
-    str = "test";
-    EXPECT_EQ(true, str == "test");
-    NtJSONString str2("test");
-    EXPECT_EQ(true, str == str2);
+    NtJSONObject* obj = new NtJSONObject();
+    NtJSONString* s1 = new NtJSONString("one");
+    NtJSONString* s2 = new NtJSONString("two");
+    obj->add("s1", s1);
+    obj->add("s2", s2);
+
+    EXPECT_EQ(true, ((NtJSONString*)obj->get("s1"))->value() == "one");
+
+    delete s1;
+    s1 = nullptr;
+    delete s2;
+    s2 = nullptr;
+    delete obj;
+    obj = nullptr;
 }
 
-TEST(NtJSONTest, Number)
+TEST(NtJSONTest, NtJSONArray)
 {
-    NtJSONNumber num(4.5);
-    EXPECT_DOUBLE_EQ(4.5, num.value());
-    num.setValue(1.2);
-    EXPECT_DOUBLE_EQ(1.2, num.value());
-    num.fromString("8.2");
-    EXPECT_DOUBLE_EQ(8.2, num.value());
-    EXPECT_EQ("8.2", num.toString());
-    num = 5.0;
-    EXPECT_EQ(true, num == 5.0);
-    NtJSONNumber num2(5.0);
-    EXPECT_EQ(true, num == num2);
+    NtJSONArray* arr = new NtJSONArray();
+    NtJSONString* s1 = new NtJSONString("one");
+    NtJSONString* s2 = new NtJSONString("two");
+    arr->add(s1);
+    arr->add(s2);
+
+    EXPECT_EQ(true, ((NtJSONString*)(*arr)[0])->value() == "one");
+    EXPECT_EQ(true, ((NtJSONString*)(*arr)[1])->value() == "two");
+
+    delete s1;
+    s1 = nullptr;
+    delete s2;
+    s2 = nullptr;
+    delete arr;
+    arr = nullptr;
 }
 
-TEST(NtJSONTest, Boolean)
+TEST(NtJSONTest, NtJSONString)
 {
-    NtJSONBoolean b(false);
-    EXPECT_EQ(false, b.value());
-    b.setValue(true);
-    EXPECT_EQ(true, b.value());
-    b = "false";
-    EXPECT_EQ(false, b.value());
-    b = 5;
-    EXPECT_EQ(true, b.value());
-    b = 0;
-    EXPECT_EQ(true, b == 0);
+    NtJSONString* str = new NtJSONString("5");
+    EXPECT_EQ(true, str->value() == "5");
+    EXPECT_EQ(5, str->toNumber());
+    str->setValue(20);
+    EXPECT_EQ(20, str->toNumber());
+    delete str;
+    str = nullptr;
 }
 
-TEST(NtJSONTest, Array)
+TEST(NtJSONTest, NtJSONNumber)
 {
-    NtJSONArray arr = { new NtJSONString("one"), new NtJSONString("two"), new NtJSONString("three") };
-    NtJSONString* str1 = static_cast<NtJSONString*>(arr[0]);
-    NtJSONString* str2 = static_cast<NtJSONString*>(arr[1]);
-    NtJSONString* str3 = static_cast<NtJSONString*>(arr[2]);
-    EXPECT_EQ(true, *str1 == "one");
-    EXPECT_EQ(true, *str2 == "two");
-    EXPECT_EQ(true, *str3 == "three");
+    NtJSONNumber* num = new NtJSONNumber("5");
+    EXPECT_DOUBLE_EQ(5, num->value());
+    num->setValue(22.3);
+    EXPECT_DOUBLE_EQ(22.3, num->value());
+    delete num;
+    num = nullptr;
+}
+
+TEST(NtJSONTest, NtJSONBoolean)
+{
+    NtJSONBoolean* b = new NtJSONBoolean("true");
+    EXPECT_EQ(true, b->value());
+    b->setValue(3);
+    EXPECT_EQ(true, b->value());
+    b->setValue(0);
+    EXPECT_EQ(false, b->value());
+    delete b;
+    b = nullptr;
+}
+
+TEST(NtJSONTest, NtJSONParse)
+{
+    std::ifstream file("test.json", std::ios::in);
+    file.seekg(0, std::ios::end);
+    size_t size = file.tellg();
+    file.seekg(0, std::ios::beg);
+
+    char* buf = new char[size + 1];
+    file.read(buf, size);
+    file.close();
+
+    NtJSONObject* obj = NtParseJSON(buf);
+    EXPECT_EQ(1, obj->count());
+
+    NtJSONElement* e1 = obj->get("quiz");
+    EXPECT_EQ(true, e1 != nullptr);
+    EXPECT_EQ(NtJSONElement::Type::OBJECT, e1->type());
+    
+    NtJSONObject* o1 = static_cast<NtJSONObject*>(e1);
+    EXPECT_EQ(2, o1->count());
+
+    NtJSONElement* e2 = o1->get("sport");
+    EXPECT_EQ(true, e2 != nullptr);
+    EXPECT_EQ(NtJSONElement::Type::OBJECT, e2->type());
+
+    NtJSONObject* o2 = static_cast<NtJSONObject*>(e2);
+    EXPECT_EQ(1, o2->count());
+
+    NtJSONElement* e3 = o2->get("q1");
+    EXPECT_EQ(true, e3 != nullptr);
+    EXPECT_EQ(NtJSONElement::Type::OBJECT, e3->type());
+
+    NtJSONObject* o3 = static_cast<NtJSONObject*>(e3);
+    EXPECT_EQ(3, o3->count());
+
+    NtJSONElement* e4 = o3->get("options");
+    EXPECT_EQ(true, e4 != nullptr);
+    EXPECT_EQ(NtJSONElement::Type::ARRAY, e4->type());
+
+    NtJSONArray* a1 = static_cast<NtJSONArray*>(e4);
+    EXPECT_EQ(4, a1->count());
+    
+    NtJSONElement* e5 = a1->get(1);
+    EXPECT_EQ(true, e5 != nullptr);
+    EXPECT_EQ(NtJSONElement::Type::STRING, e5->type());
+    
+    NtJSONString* str = static_cast<NtJSONString*>(e5);
+    EXPECT_EQ(true, str->value() == "Los Angeles Kings");
+    
+    delete buf;
+    buf = nullptr;
 }

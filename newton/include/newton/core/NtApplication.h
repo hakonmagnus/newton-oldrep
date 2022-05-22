@@ -7,111 +7,129 @@
 
 /**
  * \file NtApplication.h
- * \brief Base application class
- * \author Hákon Hjaltalín
+ * \brief Application class
  *
- * This file contains the application class definition.
+ * This file contains the definitions for a Newton application.
  */
 
-#include "newton/base/NtDefs.h"
+#include "newton/base/NtCommandLine.h"
 
 namespace newton
 {
 /**
  * \class NtApplication
- * \brief Base application class
+ * \brief Application base class
  *
- * This is the base class for a Newton application. This class should
- * be derived from to create a custom Newton application.
+ * This is the base class for a Newton application.
  */
 class NT_EXPORT NtApplication
 {
   public:
   /**
-   * \brief Default constructor
+   * \brief Constructor
+   *
+   * Default constructor.
+   *
    */
   NtApplication();
 
   /**
-   * No copy construction
-   */
-  NtApplication(const NtApplication&) = delete;
-
-  /**
-   * No move construction
-   */
-  NtApplication(NtApplication&&) = delete;
-
-  /**
-   * \brief Virtual destructor
+   * \brief Destructor
+   *
+   * Virtual destructor
    */
   virtual ~NtApplication();
 
   /**
-   * \brief On initialize
+   * \brief Initialize application
    *
-   * This function is called when the application is
-   * initialized and can be overridden.
+   * Initialize the application.
    *
-   * \param argc Command line argument count
-   * \param argv Command line argument vector
+   * \param argc Argument count
+   * \param argv Argument vector
    * \return True on success
    */
-  virtual bool onInit(int& argc, char** argv);
+  bool initialize(int& argc, char** argv);
 
   /**
-   * \brief On exit
+   * \brief Run the application
    *
-   * This function is called when the application exits.
-   */
-  virtual void onExit();
-
-  /**
-   * \brief Run application
-   *
-   * The main function calls this function to run the
-   * application.
+   * Enter the application main loop.
    *
    * \return Exit code
    */
   int run();
 
   /**
-   * \brief Get app instance
+   * \brief Exit application
    *
-   * Get the application instance.
+   * Exit the application with a specified return code.
    *
-   * \return Application instance
+   * \param code Exit code
+   */
+  void exit(int code);
+
+  /**
+   * \brief Handle on init
+   *
+   * This function is called upon application initialization.
+   *
+   * \return True on success
+   */
+  virtual bool onInit();
+
+  /**
+   * \brief Handle on exit
+   *
+   * This function is called when the application exits.
+   */
+  virtual void onExit();
+
+  /**
+   * \brief Get application instance
+   *
+   * Get the application's static instance.
+   *
+   * \return App instance
    */
   static NtApplication* instance() { return ms_instance; }
 
-  protected:
-  /**
-   * True if app is running
-   */
-  bool m_isRunning;
-
+  private:
   /**
    * Application instance
    */
   static NtApplication* ms_instance;
+  
+  /**
+   * Is running?
+   */
+  bool m_running;
+  
+  /**
+   * Exit code
+   */
+  int m_exitCode;
+
+  /**
+   * Command-line parser
+   */
+  NtCommandLine* m_commandLine;
 };
 
 }  // namespace newton
 
 /**
- * \def NT_IMPLEMENT_APP(apptype)
+ * \def NT_IMPLEMENT_APP
  * \brief Implement application
  *
- * This macro implements the application main function.
- *
- * \param apptype Application class name
+ * This macro implements the main function for the application
+ * and creates a new app instance.
  */
 #define NT_IMPLEMENT_APP(apptype)                                              \
   int main(int argc, char** argv)                                              \
   {                                                                            \
     apptype* app = new apptype();                                              \
-    if (!app->onInit(argc, argv)) {                                            \
+    if (!app->initialize(argc, argv)) {                                        \
       return -1;                                                               \
     }                                                                          \
     return app->run();                                                         \

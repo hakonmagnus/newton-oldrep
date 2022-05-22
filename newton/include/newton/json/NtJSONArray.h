@@ -7,15 +7,15 @@
 
 /**
  * \file NtJSONArray.h
- * \brief JSON array element
+ * \brief JSON array
+ * \author Hákon Hjaltalín
  *
  * This file contains the class definition for a JSON array.
  */
 
 #include "newton/json/NtJSONElement.h"
-#include "newton/base/NtException.h"
 #include <vector>
-#include <utility>
+#include <algorithm>
 
 namespace newton
 {
@@ -24,187 +24,90 @@ namespace newton
  * \class NtJSONArray
  * \brief JSON array class
  *
- * This class defines a JSON array element.
+ * This class defines a JSON array.
  */
 class NT_EXPORT NtJSONArray : public NtJSONElement
 {
-private:
-    using iterator = std::vector<NtJSONElement*>::iterator;
-
 public:
     /**
-     * \brief Default constructor
+     * \brief Constructor
      *
-     * Default constructor. Takes a vector of elements.
-     *
-     * \param elements Elements to set
+     * Default constructor.
      */
-    NtJSONArray(const std::vector<NtJSONElement*>& elements = std::vector<NtJSONElement*>())
-        : NtJSONElement(Type::ARRAY), m_elements{ elements }
+    NtJSONArray()
+        : NtJSONElement(Type::ARRAY)
     {
     }
 
     /**
-     * \brief Constructor from initializer list
+     * \brief Destructor
+     */
+    ~NtJSONArray() { }
+
+    /**
+     * \brief Add element
      *
-     * Constructs an NtJSONArray from an initializer list.
-     *
-     * \param list Initializer list
-     */
-    NtJSONArray(std::initializer_list<NtJSONElement*> list)
-        : NtJSONElement(Type::ARRAY), m_elements{ list }
-    {
-    }
-
-    /**
-     * \brief Copy constructor
-     * \param other Other NtJSONArray
-     */
-    NtJSONArray(const NtJSONArray& other) :
-        NtJSONElement(Type::ARRAY), m_elements{ other.m_elements }
-    {
-    }
-
-    /**
-     * \brief Move constructor
-     * \param other Other NtJSONArray
-     */
-    NtJSONArray(NtJSONArray&& other) :
-        NtJSONElement(Type::ARRAY), m_elements{ std::move(other.m_elements) }
-    {
-    }
-
-    /**
-     * \brief Virtual destructor
-     */
-    virtual ~NtJSONArray() {}
-
-    /**
-     * \brief Copy assignment
-     * \param other Other NtJSONArray
-     * \return Reference to this
-     */
-    NtJSONArray& operator=(const NtJSONArray& other)
-    {
-        m_elements = other.m_elements;
-        return *this;
-    }
-
-    /**
-     * \brief Move assignment
-     * \param other Other NtJSONArray
-     * \return Reference to this
-     */
-    NtJSONArray& operator=(NtJSONArray&& other)
-    {
-        m_elements = std::move(other.m_elements);
-        return *this;
-    }
-
-    /**
-     * \brief Get array size
-     * 
-     * Get the number of elements in the array.
-     *
-     * \return Array size
-     */
-    size_t size() const { return m_elements.size(); }
-
-    /**
-     * \brief Element access
-     *
-     * Array subscript operator for element access.
-     *
-     * \param idx Index of element
-     * \return Element at index idx
-     */
-    NtJSONElement* operator[](const size_t idx)
-    {
-        if (idx >= m_elements.size())
-            throw NtOutOfRange("Array subscript out of range.");
-
-        return m_elements[idx];
-    }
-
-    /**
-     * \brief Get element
-     *
-     * Get element at index
-     *
-     * \param idx Index of element
-     * \return Element at index idx
-     */
-    NtJSONElement* at(const size_t idx)
-    {
-        if (idx >= m_elements.size())
-            throw NtOutOfRange("Array subscript out of range.");
-
-        return m_elements[idx];
-    }
-
-    /**
-     * \brief Push element
-     *
-     * Add an element to the back of the array.
+     * Add an element to this array.
      *
      * \param element Element to add
      */
-    void pushElement(NtJSONElement* element)
+    void add(NtJSONElement* element)
     {
-        m_elements.push_back(element);
+        m_members.push_back(element);
     }
 
     /**
-     * \brief Insert element
+     * \brief Remove element
      *
-     * Insert an element into the array.
+     * Remove an element from this array
      *
-     * \param pos Position to insert
-     * \param element Element to insert at position
-     * \return Iterator pointing to inserted element
+     * \param element Element to remove
      */
-    iterator insert(iterator pos, NtJSONElement* element)
+    void remove(NtJSONElement* element)
     {
-        return m_elements.insert(pos, element);
+        auto it = std::find(m_members.begin(), m_members.end(), element);
+        if (it != m_members.end())
+            m_members.erase(it);
     }
 
     /**
-     * \brief Erase element
+     * \brief Access element
      *
-     * Erase an element from the array.
+     * Get element by index
      *
-     * \param pos Position to erase
+     * \param idx Index to access
      */
-    iterator erase(iterator pos)
+    NtJSONElement* get(const size_t idx)
     {
-        return m_elements.erase(pos);
+        return m_members[idx];
     }
 
     /**
-     * \brief Erase element
+     * \brief Member access operator
      *
-     * Erase multiple elements from the array.
+     * Access member at index.
      *
-     * \param first First element to erase
-     * \param last Last element to erase
+     * \param idx Index to access
      */
-    iterator erase(iterator first, iterator last)
+    NtJSONElement* operator[](const size_t idx)
     {
-        return m_elements.erase(first, last);
+        return m_members[idx];
     }
 
     /**
-     * \brief Clear array
+     * \brief Element count
      *
-     * Clear all array elements.
+     * Get number of elements.
+     *
+     * \return Number of elements
      */
-    void clear() { m_elements.clear(); }
+    size_t count() const { return m_members.size(); }
 
 private:
     /**
-     * List of elements
+     * Members
      */
-    std::vector<NtJSONElement*> m_elements;
+    std::vector<NtJSONElement*> m_members;
 };
 
 }

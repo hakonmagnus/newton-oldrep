@@ -1,6 +1,0 @@
-option(BUILD_SHARED_LIBS        "Build shared instead of static libraries."             OFF)
-option(NT_BUILD_TESTS           "Build the unit tests."                                 ON)
-option(NT_BUILD_DOCS            "Build the Doxygen documentation."                      OFF)
-option(NT_BUILD_EXAMPLES        "Build the example projects."                           OFF)
-option(NT_BUILD_BENCHMARKS      "Build the performance benchmarks."                     OFF)
-option(NT_WARNINGS_AS_ERRORS    "Treat compiler warnings as errors."                    OFF)

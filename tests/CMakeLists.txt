@@ -13,7 +13,6 @@ set_target_properties(gmock_main PROPERTIES FOLDER extern)
 
 set(TESTS_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/NtApplicationTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/NtJSONTest.cpp
 )
 
@@ -24,6 +23,8 @@ gtest_discover_tests(tests
     PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${PROJECT_DIR}"
 )
 set_target_properties(tests PROPERTIES FOLDER tests)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/test.json ${CMAKE_BINARY_DIR}/tests/test.json @ONLY)
 
 if (CMAKE_BUILD_TYPE MATCHES "Coverage")
     include(CodeCoverage)

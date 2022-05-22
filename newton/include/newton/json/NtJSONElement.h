@@ -7,60 +7,74 @@
 
 /**
  * \file NtJSONElement.h
- * \brief JSON element
+ * \brief Element base class
+ * \author Hákon Hjaltalín
  *
- * This file contains the class definition for a JSON element.
+ * This file contains the base definition for a JSON element.
  */
 
 #include "newton/base/NtDefs.h"
 
 namespace newton
 {
+
 /**
  * \class NtJSONElement
- * \brief JSON element
+ * \brief JSON element class
  *
- * This is the base class for a JSON element.
+ * This is the base class for all JSON elements.
  */
 class NT_EXPORT NtJSONElement
 {
-  public:
-  /**
-   * \enum Type
-   * \brief Type of element
-   *
-   * This enum class defines the element type.
-   */
-  enum class Type { OBJECT, ARRAY, STRING, NUMBER, BOOLEAN, NUL };
+public:
+    /**
+     * \enum Element type
+     * \brief Type of element
+     *
+     * Enum class describing the element type of a JSON element.
+     */
+    enum class Type
+    {
+        OBJECT,     ///< JSON object
+        ARRAY,      ///< JSON array
+        STRING,     ///< JSON string
+        NUMBER,     ///< JSON number
+        BOOLEAN,    ///< JSON boolean
+        NUL         ///< JSON null
+    };
 
-  /**
-   * \brief Default constructor
-   *
-   * Default constructor taking a type of element.
-   *
-   * \param type Element type
-   */
-  explicit NtJSONElement(const Type type) : m_type{type} {}
+    /**
+     * \brief Constructor
+     *
+     * Default constructor with type.
+     */
+    NtJSONElement(const Type type)
+        : m_type{ type }
+    {
+    }
 
-  /**
-   * \brief Virtual destructor
-   */
-  virtual ~NtJSONElement() {}
+    /**
+     * \brief Destructor
+     *
+     * Virtual destructor.
+     */
+    virtual ~NtJSONElement() { }
 
-  /**
-   * \brief Get the type of element
-   *
-   * Get the JSON element type.
-   *
-   * \return Element type
-   */
-  Type type() const { return m_type; }
+    /**
+     * \brief Get type
+     *
+     * Get the type of JSON element.
+     *
+     * \return Element type
+     */
+    Type type() const { return m_type; }
 
-  protected:
-  /**
-   * Element type
-   */
-  Type m_type;
+protected:
+    /**
+     * Element type
+     */
+    Type m_type;
 };
 
-}  // namespace newton
+}
+

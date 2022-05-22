@@ -7,16 +7,16 @@
 
 /**
  * \file newton.h
- * \brief Newton header
+ * \brief Main Newton header
  * \author Hákon Hjaltalín
  *
- * This is the main header for the Newton Framework.
+ * This is the main include header for the Newton Framework.
+ * Include this file to access all features offered by the
+ * Newton Framework.
  */
 
+#include "newton/base/NtLogger.h"
 #include "newton/base/NtException.h"
+#include "newton/string/NtString.h"
 #include "newton/core/NtApplication.h"
-#include "newton/json/NtJSONString.h"
-#include "newton/json/NtJSONNumber.h"
-#include "newton/json/NtJSONBoolean.h"
-#include "newton/json/NtJSONNul.h"
-#include "newton/json/NtJSONArray.h"
+#include "newton/json/NtJSONParser.h"

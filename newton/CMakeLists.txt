@@ -1,18 +1,25 @@
 set(NEWTON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/NtApplication.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/base/NtLogger.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/base/NtCommandLine.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/json/NtJSONParser.cpp
 )
 
 set(NEWTON_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/newton.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/base/NtDefs.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/base/NtException.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/base/NtLogger.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/base/NtCommandLine.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/core/NtApplication.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/core/NtServer.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONElement.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONObject.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONArray.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONString.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONNumber.h
     ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONBoolean.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONNul.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONNull.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/json/NtJSONParser.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/newton/string/NtString.h
 )
 
 if (BUILD_SHARED_LIBS)

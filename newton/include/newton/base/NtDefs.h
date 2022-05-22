@@ -104,69 +104,28 @@
 #ifndef NT_EXPORT
 #  if defined(NT_WINDOWS) && defined(NT_COMPILER_MSVC) &&                      \
     defined(NT_SHARED_LIBS)
-#    define NT_EXPORT __declspec(dllexport)
+#    define NT_EXPORT  __declspec(dllexport)
+#    define NT_EXPORTC extern "C" __declspec(dllexport)
 #  else
 #    define NT_EXPORT
+#    define NT_EXPORTC extern "C"
 #  endif
 #endif
 
 #ifndef NT_IMPORT
 #  if defined(NT_WINDOWS) && defined(NT_COMPILER_MSVC) &&                      \
     defined(NT_SHARED_LIBS)
-#    define NT_IMPORT extern __declspec(dllimport)
+#    define NT_IMPORT  extern __declspec(dllimport)
+#    define NT_IMPORTC extern "C" __declspecc(dllimport)
 #  else
-#    define NT_IMPORT extern
+#    define NT_IMPORT  extern
+#    define NT_IMPORTC extern "C"
 #  endif
 #endif
 
 #if defined(NT_WINDOWS)
 #  ifndef WIN32_LEAN_AND_MEAN
 #    define WIN32_LEAN_AND_MEAN
-#  endif
-#  ifndef NOGDI
-#    define NOGDI
-#  endif
-#  ifndef NOKERNEL
-#    define NOKERNEL
-#  endif
-#  ifndef NOUSER
-#    define NOUSER
-#  endif
-#  ifndef NONLS
-#    define NONLS
-#  endif
-#  ifndef NOMB
-#    define NOMB
-#  endif
-#  ifndef NOMINMAX
-#    define NOMINMAX
-#  endif
-#  ifndef NOSOUND
-#    define NOSOUND
-#  endif
-#  ifndef NOCOMM
-#    define NOCOMM
-#  endif
-#  ifndef NOHELP
-#    define NOHELP
-#  endif
-#  ifndef NOPROFILER
-#    define NOPROFILER
-#  endif
-#  ifndef NODEFERWINDOWPOS
-#    define NODEFERWINDOWPOS
-#  endif
-#  ifndef NOMETAFILE
-#    define NOMETAFILE
-#  endif
-#  ifndef NOSCROLL
-#    define NOSCROLL
-#  endif
-#  ifndef NORASTEROPS
-#    define NORASTEROPS
-#  endif
-#  ifndef NOATOM
-#    define NOATOM
 #  endif
 #  include <windows.h>
 #endif
@@ -225,3 +184,17 @@ using std::uintptr_t;
 #  include <sys/socket.h>
 #  include <netinet/in.h>
 #endif
+
+#define NT_UNUSED(x) (void)x;
+
+#define NT_STATIC_ASSERT(Condition) static_assert(bool(Condition), #Condition)
+#define NT_STATIC_ASSERT_MSG(Condition, Message)                               \
+  static_assert(bool(Condition), Message)
+
+#define NT_DISABLE_COPY(Class)                                                 \
+  Class(const Class&) = delete;                                                \
+  Class& operator=(const Class&) = delete;
+
+#define NT_DISABLE_MOVE(Class)                                                 \
+  Class(Class&&) = delete;                                                     \
+  Class& operator=(Class&&) = delete;
