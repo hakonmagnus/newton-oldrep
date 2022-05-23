@@ -65,5 +65,41 @@ protected:
     std::string m_msg;
 };
 
+class NT_EXPORT NtRuntimeException : public NtException
+{
+public:
+    /**
+     * \brief Constructor
+     *
+     * Default constructor with message.
+     *
+     * \param msg Message string
+     */
+    NtRuntimeException(const std::string& msg)
+        : m_msg{ msg }
+    {
+    }
+
+    /**
+     * \brief Get exception message
+     *
+     * Get the exception message.
+     *
+     * \return Exception message
+     */
+    virtual std::string message() override
+    {
+        std::string str = "Newton Runtime Exception: ";
+        str += m_msg;
+        return str;
+    }
+
+protected:
+    /**
+     * Message string
+     */
+    std::string m_msg;
+};
+
 }
 

@@ -132,6 +132,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <cstring>
 
 using std::max_align_t;
 using std::ptrdiff_t;
@@ -180,9 +181,17 @@ using std::uintptr_t;
 #    pragma comment(lib, "Ws2_32.lib")
 #  endif
 #else
+#  include <unistd.h>
+#  include <arpa/inet.h>
 #  include <sys/types.h>
 #  include <sys/socket.h>
+#  include <sys/ioctl.h>
+#  include <sys/epoll.h>
+#  include <sys/un.h>
+#  include <netdb.h>
 #  include <netinet/in.h>
+#  include <fcntl.h>
+#  include <signal.h>
 #endif
 
 #define NT_UNUSED(x) (void)x;

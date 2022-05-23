@@ -13,6 +13,8 @@
  */
 
 #include "newton/base/NtCommandLine.h"
+#include "newton/core/NtHTTPServer.h"
+#include "newton/core/NtVirtualHost.h"
 
 namespace newton
 {
@@ -114,6 +116,16 @@ class NT_EXPORT NtApplication
    * Command-line parser
    */
   NtCommandLine* m_commandLine;
+
+  /**
+   * Main HTTP server
+   */
+  NtHTTPServer* m_httpServer;
+
+  /**
+   * List of virtual hosts
+   */
+  std::vector<NtVirtualHost*> m_virtualHosts;
 };
 
 }  // namespace newton

@@ -12,10 +12,6 @@ set_policy(CMP0077 NEW) # Allow option() overrides in importing projects
 # Module directory
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-# Disable in-source build
-set(CMAKE_DISABLE_SOURCE_CHANGES ON)
-set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
-
 # Project
 project(newton
     VERSION 1.0.0

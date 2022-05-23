@@ -40,5 +40,18 @@ static inline void NtTrim(std::string& s)
     NtRTrim(s);
 }
 
+/**
+ * \enum Character encoding
+ *
+ * This enum defines classes of character encodings.
+ */
+enum NtUTFEncoding
+{
+    NT_UTF_UNKNOWN,     ///< Unknown encoding
+    NT_UTF_8,           ///< UTF-8 encoding
+    NT_UTF_16BE,        ///< UTF-16 Big-Endian
+    NT_UTF_16LE         ///< UTF-16 Little-Endian
+};
+
 }
 

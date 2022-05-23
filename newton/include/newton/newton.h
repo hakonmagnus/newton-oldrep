@@ -19,4 +19,7 @@
 #include "newton/base/NtException.h"
 #include "newton/string/NtString.h"
 #include "newton/core/NtApplication.h"
+#include "newton/core/NtServer.h"
 #include "newton/json/NtJSONParser.h"
+#include "newton/http/NtHTTPRequest.h"
+#include "newton/html/NtHTMLParser.h"

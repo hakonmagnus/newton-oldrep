@@ -4,3 +4,9 @@
 [submodule "extern/benchmark"]
 	path = extern/benchmark
 	url = https://github.com/google/benchmark.git
+[submodule "extern/libevent"]
+	path = extern/libevent
+	url = https://github.com/libevent/libevent.git
+[submodule "newton/extern/libevent"]
+	path = newton/extern/libevent
+	url = https://github.com/libevent/libevent.git
